@@ -11,10 +11,4 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/ola/{nome}', ['as' => 'ola', 'uses' => 'TestController@index']);
-
-Route::get('/notas', ['as' => 'notas', 'uses' => 'TestController@notas']);
+Route::get('/', ['as' => 'index', 'uses' => 'PostController@index']);
