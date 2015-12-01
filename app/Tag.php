@@ -10,7 +10,7 @@ class Tag extends Model
 	public $timestamps = false;
 
 
-    public function tags()
+    public function posts()
     {
         return $this->belongsToMany('App\Post', 'posts_tags');
     }

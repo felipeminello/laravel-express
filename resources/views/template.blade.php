@@ -116,7 +116,7 @@
                         </a>
                     </li>
                 </ul>
-                <p class="copyright text-muted">Copyright &copy; Laravel Express 2015</p>
+                <p class="copyright text-muted">Laravel Express 2015</p>
             </div>
         </div>
     </div>
