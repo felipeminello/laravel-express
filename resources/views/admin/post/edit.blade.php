@@ -19,6 +19,11 @@
     @include('admin.post._form')
 
     <div class="form-group">
+        {!! Form::label('tags', 'Tags:') !!}
+        {!! Form::text('tags', $post->tagList, ['class' => 'form-control']) !!}
+    </div>
+
+    <div class="form-group">
         {!! Form::submit('Save Post', ['class' => 'btn btn-primary']) !!}
     </div>
 

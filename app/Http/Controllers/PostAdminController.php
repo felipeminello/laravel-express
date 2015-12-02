@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
+use App\Tag;
 use App\User;
 use App\Post;
 use App\Http\Requests;
+use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PostAdminController extends Controller
@@ -35,11 +37,26 @@ class PostAdminController extends Controller
 	{
 		$user = $this->user->first();
 
+		$tagsId = $this->getTagsIds($request->tags);
+
 		try {
-			$this->post->create(array_merge($request->all(), ['user_id' => $user->id]));
+			$post = $this->post->create(array_merge($request->all(), ['user_id' => $user->id]));
+
+			$post->tags()->sync($tagsId);
 
 			return redirect()->route('admin.post.index');
 		} catch (\Exception $e) {
+			echo $e->getMessage();
+		}
+	}
+
+	public function show($id)
+	{
+		try {
+			$post = $this->post->findOrFail($id);
+
+			return view('admin.post.show', compact('post'));
+		} catch (ModelNotFoundException $e) {
 			echo $e->getMessage();
 		}
 	}
@@ -59,6 +76,12 @@ class PostAdminController extends Controller
 	{
 		$this->post->find($id)->update($request->all());
 
+		$post = $this->post->find($id);
+
+		$tagsId = $this->getTagsIds($request->tags);
+
+		$post->tags()->sync($tagsId);
+
 		return redirect()->route('admin.post.index');
 	}
 
@@ -67,5 +90,18 @@ class PostAdminController extends Controller
 		$this->post->find($id)->delete();
 
 		return redirect()->route('admin.post.index');
+	}
+
+	private function getTagsIds($tags)
+	{
+		$tags = array_filter(array_map('trim', explode(',', $tags)));
+
+		$tagsId = array();
+
+		foreach($tags as $tagName) {
+			$tagsId[] = Tag::firstOrCreate(['name' => $tagName])->id;
+		}
+
+		return $tagsId;
 	}
 }

@@ -29,6 +29,7 @@
                 <td>{{ $post->id }}</td>
                 <td>{{ $post->title }}</td>
                 <td class="text-right">
+                    <a href="{{ route('admin.post.show', ['id' => $post->id]) }}" class="btn btn-info">Show</a>
                     <a href="{{ route('admin.post.edit', ['id' => $post->id]) }}" class="btn btn-primary">Edit</a>
                     <a href="{{ route('admin.post.destroy', ['id' => $post->id]) }}" onclick="return confirm('Confirm?')" class="btn btn-danger">Destroy</a>
                 </td>
