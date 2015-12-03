@@ -55,7 +55,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="/">Home</a>
+                    <a href="{{ url() }}">Home</a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.post.index') }}">Admin</a>
                 </li>
                 <li>
                     <a href="http://startbootstrap.com/template-overviews/clean-blog/" target="_blank">Template</a>
@@ -88,8 +91,6 @@
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             @yield('content')
-
-                    <!-- Pager -->
             <ul class="pager">
                 <li class="next">
                     <a href="#">Older Posts &rarr;</a>

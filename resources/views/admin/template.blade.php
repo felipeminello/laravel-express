@@ -28,13 +28,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Laravel</a>
+            <a class="navbar-brand" href="{{ url() }}">Blog</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="{{ route('admin.post.index') }}">Post</a></li>
                 <li><a href="{{ route('admin.post.create') }}">Create post</a></li>
+                <li><a href="{{ route('auth.logout') }}">Logout</a></li>
             </ul>
         </div>
     </div>

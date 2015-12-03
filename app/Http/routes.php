@@ -13,7 +13,17 @@
 
 Route::get('/', ['as' => 'index', 'uses' => 'PostController@index']);
 
-Route::group(['prefix' => '/admin'], function () {
+Route::group(['prefix' => '/auth'], function () {
+	Route::get('/login',	['as' => 'auth.login',		'uses' => 'Auth\AuthController@getLogin']);
+	Route::post('/login',	['as' => 'auth.login.post',	'uses' => 'Auth\AuthController@postLogin']);
+	Route::get('/logout',	['as' => 'auth.logout',		'uses' => 'Auth\AuthController@getLogout']);
+
+	Route::get('/email',	['as' => 'auth.email',		'uses' => 'Auth\PasswordController@getEmail']);
+});
+
+
+
+Route::group(['prefix' => '/admin', 'middleware' => 'auth'], function () {
 	Route::group(['prefix' => '/post'], function () {
 		Route::get('/', 			['as' => 'admin.post.index',	'uses' => 'PostAdminController@index']);
 
